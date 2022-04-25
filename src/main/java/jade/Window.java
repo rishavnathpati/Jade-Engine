@@ -4,6 +4,9 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import java.util.Objects;
+
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
@@ -13,12 +16,18 @@ public class Window {
     private static Window window = null;
     int width, height;
     String title;
+    private float r;
+    private float g;
+    private float b;
+    private final float a;
     private long glfwWindow;
+    private boolean fadeToBlack;
 
     private Window() {
         this.height = 1920;
         this.width = 1080;
         this.title = "Mario";
+        r = b = g = a = 1;
     }
 
     public static Window get() {
@@ -31,8 +40,17 @@ public class Window {
 
     public void run() {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+
         init();
         loop();
+
+        //Free the memory once the loop is finished
+        glfwFreeCallbacks(glfwWindow);
+        glfwDestroyWindow(glfwWindow);
+
+        //Terminate the GLFW and free the error callback
+        glfwTerminate();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 
     private void init() {
@@ -56,8 +74,15 @@ public class Window {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
 
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+
+
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
+
         //Enable v-sync on
         glfwSwapInterval(1);
 
@@ -78,8 +103,18 @@ public class Window {
             //poll events from
             glfwPollEvents();
 
-            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+            glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
+
+            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
+                fadeToBlack = true;
+                System.out.println("Space key pressed");
+            }
+            if (fadeToBlack) {
+                r = Math.max(r - 0.01f, 0);
+                g = Math.max(g - 0.01f, 0);
+                b = Math.max(b - 0.01f, 0);
+            }
 
             glfwSwapBuffers(glfwWindow);
         }
