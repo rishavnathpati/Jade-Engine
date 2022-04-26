@@ -31,11 +31,11 @@ public class MouseListener {
         return MouseListener.instance;
     }
 
-    public static void mousePosCallback(long window, double xpos, double ypos) {
+    public static void mousePosCallback(long window, double xPos, double yPos) {
         get().lastX = get().xPos;
         get().lastY = get().yPos;
-        get().xPos = xpos;
-        get().yPos = ypos;
+        get().xPos = xPos;
+        get().yPos = yPos;
         get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
 
     }

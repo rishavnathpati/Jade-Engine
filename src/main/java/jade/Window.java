@@ -3,6 +3,7 @@ package jade;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import util.Time;
 
 import java.util.Objects;
 
@@ -14,20 +15,38 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Window {
 
     private static Window window = null;
+    private static Scene currentScene;
+    private final float a;
     int width, height;
     String title;
-    private float r;
-    private float g;
-    private float b;
-    private final float a;
+    float r;
+    float g;
+    float b;
     private long glfwWindow;
     private boolean fadeToBlack;
+
 
     private Window() {
         this.height = 1920;
         this.width = 1080;
         this.title = "Mario";
         r = b = g = a = 1;
+    }
+
+    public static void changeScene(int newScene) {
+        switch (newScene) {
+            case 0:
+                currentScene = new LevelEditorScene();
+                //currentScene.init(newScene)
+                break;
+
+            case 1:
+                currentScene = new LevelScene();
+                break;
+
+            default:
+                assert false : "Unknown Scene '" + newScene + "'";
+        }
     }
 
     public static Window get() {
@@ -95,9 +114,14 @@ public class Window {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
+        Window.changeScene(0);
     }
 
     private void loop() {
+
+        float beginTime = Time.getTime();
+        float endTime = Time.getTime();
+        float dt = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             //poll events from
@@ -106,7 +130,7 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
+            /*if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
                 fadeToBlack = true;
                 System.out.println("Space key pressed");
             }
@@ -114,9 +138,16 @@ public class Window {
                 r = Math.max(r - 0.01f, 0);
                 g = Math.max(g - 0.01f, 0);
                 b = Math.max(b - 0.01f, 0);
-            }
+            }*/
+
+            if (dt >= 0) currentScene.update(dt);
+
 
             glfwSwapBuffers(glfwWindow);
+
+            endTime = Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
 
     }
