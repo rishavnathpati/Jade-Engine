@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7542385-62a4-48bf-9294-c28c497eaf09" name="Changes" comment="Adding event listener with GLFW">
-      <change afterPath="$PROJECT_DIR$/src/main/java/jade/LevelEditorScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jade/LevelScene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jade/Scene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/Time.java" afterDir="false" />
+    <list default="true" id="c7542385-62a4-48bf-9294-c28c497eaf09" name="Changes" comment="Creating a Scene Manager &amp; Delta Time Variable">
+      <change afterPath="$PROJECT_DIR$/assets/shaders/default.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jade/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jade/MouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jade/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jade/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jade/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jade/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jade/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jade/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,17 +65,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="jade" />
@@ -111,7 +110,15 @@
       <workItem from="1650726833059" duration="1517000" />
       <workItem from="1650883402210" duration="4525000" />
       <workItem from="1650902424606" duration="206000" />
-      <workItem from="1650966110961" duration="2634000" />
+      <workItem from="1650966110961" duration="3158000" />
+      <workItem from="1650976077147" duration="606000" />
+      <workItem from="1651225006305" duration="54000" />
+      <workItem from="1651225198467" duration="2660000" />
+      <workItem from="1651291734538" duration="1393000" />
+      <workItem from="1651293154850" duration="51000" />
+      <workItem from="1651293235771" duration="515000" />
+      <workItem from="1651293770757" duration="3738000" />
+      <workItem from="1651313917747" duration="4638000" />
     </task>
     <task id="LOCAL-00001" summary="Made Window class to render a window">
       <created>1650618268733</created>
@@ -127,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650888117628</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Creating a Scene Manager &amp; Delta Time Variable">
+      <created>1650968990624</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1650968990624</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,7 +161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Made Window class to render a window" />
     <MESSAGE value="Adding event listener with GLFW" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding event listener with GLFW" />
+    <MESSAGE value="Creating a Scene Manager &amp; Delta Time Variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating a Scene Manager &amp; Delta Time Variable" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
