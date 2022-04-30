@@ -14,9 +14,6 @@ public class LevelEditorScene extends Scene {
     private final String vertexShaderSrc = "#version 330 core\n" + "layout (location=0) in vec3 aPos;\n" + "layout (location=1) in vec4 aColor;\n" + "\n" + "out vec4 fColor;\n" + "\n" + "void main()\n" + "{\n" + "    fColor = aColor;\n" + "    gl_Position = vec4(aPos, 1.0);\n" + "}";
 
     private final String fragmentShaderSrc = "#version 330 core\n" + "\n" + "in vec4 fColor;\n" + "\n" + "out vec4 color;\n" + "\n" + "void main()\n" + "{\n" + "    color = fColor;\n" + "}";
-
-    private int vertexID, fragmentID, shaderProgram;
-
     private final float[] vertexArray = {
             // position               // color
             0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
@@ -24,7 +21,6 @@ public class LevelEditorScene extends Scene {
             0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
             -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // Bottom left  3
     };
-
     // IMPORTANT: Must be in counter-clockwise order
     private final int[] elementArray = {
             /*
@@ -34,7 +30,7 @@ public class LevelEditorScene extends Scene {
             2, 1, 0, // Top right triangle
             0, 1, 3 // bottom left triangle
     };
-
+    private int vertexID, fragmentID, shaderProgram;
     private int vaoID, vboID, eboID;
 
     public LevelEditorScene() {
@@ -43,9 +39,9 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
-        // ============================================================
-        // Compile and link shaders
-        // ============================================================
+        //  ============================================================
+        //  ||   Compile and link shaders                             ||
+        //  ============================================================
 
         // First load and compile the vertex shader
         vertexID = glCreateShader(GL_VERTEX_SHADER);
@@ -91,10 +87,9 @@ public class LevelEditorScene extends Scene {
             System.out.println(glGetProgramInfoLog(shaderProgram, len));
             assert false : "";
         }
-
-        // ============================================================
-        // Generate VAO, VBO, and EBO buffer objects, and send to GPU
-        // ============================================================
+        //  ===================================================================
+        //  ||  Generate VAO, VBO, and EBO buffer objects, and send to GPU   ||
+        //  ===================================================================
         vaoID = glGenVertexArrays();
         glBindVertexArray(vaoID);
 
