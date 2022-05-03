@@ -12,18 +12,38 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+/**
+ * The type Window.
+ */
 public class Window {
 
     private static Window window = null;
     private static Scene currentScene;
     private final float a;
-    int width, height;
+    /**
+     * The Width.
+     */
+    int width, /**
+     * The Height.
+     */
+    height;
+    /**
+     * The Title.
+     */
     String title;
+    /**
+     * The R.
+     */
     float r;
+    /**
+     * The G.
+     */
     float g;
+    /**
+     * The B.
+     */
     float b;
     private long glfwWindow;
-    private boolean fadeToBlack;
 
 
     private Window() {
@@ -33,6 +53,11 @@ public class Window {
         r = b = g = a = 1;
     }
 
+    /**
+     * Change scene.
+     *
+     * @param newScene the new scene
+     */
     public static void changeScene(int newScene) {
         switch (newScene) {
             case 0:
@@ -50,6 +75,11 @@ public class Window {
         }
     }
 
+    /**
+     * Get window.
+     *
+     * @return the window
+     */
     public static Window get() {
 
         if (Window.window == null) {
@@ -58,6 +88,9 @@ public class Window {
         return Window.window;
     }
 
+    /**
+     * Run.
+     */
     public void run() {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
@@ -121,7 +154,8 @@ public class Window {
     private void loop() {
 
         float beginTime = Time.getTime();
-        float endTime = Time.getTime();
+        Time.getTime();
+        float endTime;
         float dt = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
@@ -130,16 +164,6 @@ public class Window {
 
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
-
-            /*if (KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
-                fadeToBlack = true;
-                System.out.println("Space key pressed");
-            }
-            if (fadeToBlack) {
-                r = Math.max(r - 0.01f, 0);
-                g = Math.max(g - 0.01f, 0);
-                b = Math.max(b - 0.01f, 0);
-            }*/
 
             if (dt >= 0) currentScene.update(dt);
 
